@@ -1,0 +1,10 @@
+.file_iconImg {
+    width: 40px;
+    display: inline-block;
+}
+.file_created {
+    display: inline-block;
+}
+.file_size {
+    display: inline-block;
+}

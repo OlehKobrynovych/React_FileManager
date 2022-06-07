@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import FolderIcon from "../../assets/img/folder.svg";
+import Filter from "../Filter/Filter";
 import Folder from "../Folder/Folder";
 
 
 const FileMenedger = () => {
     const [folders, setFolders] = useState({})
+    const [filterFolders, setFilterFolders] = useState([])
     const [currentFolderName, setCurrentFolderName] = useState(null)
 
     // debugger
@@ -23,12 +25,13 @@ const FileMenedger = () => {
 
     const handleClick = (folderName) => {
         setCurrentFolderName(folderName)
+        setFilterFolders(folders[folderName])
 }
 
 
   return ( 
-//    <div>{files.Folder1 && files.Folder1[0].name}</div>
    <div>
+       <Filter setFilterFolders={setFilterFolders} files={filterFolders}/>
        {
            !currentFolderName && folders.Folder1 && Object.keys(folders).map(el => (
                <button 
@@ -39,7 +42,7 @@ const FileMenedger = () => {
            ))
        }
        {
-           currentFolderName && <Folder files={folders[currentFolderName]} />
+           currentFolderName && <Folder files={filterFolders} />
        }
    
    </div>

@@ -6,6 +6,8 @@ import jpegIcon from "../../assets/img/jpeg.svg";
 import pdfIcon  from "../../assets/img/pdf.svg";
 import pngIcon from "../../assets/img/png.svg";
 import xlsxIcon from "../../assets/img/xlsx.svg";
+import '../File/File.css';
+
 
 
 const File = ({file}) => {
@@ -31,7 +33,12 @@ const File = ({file}) => {
 return ( 
     <div>
         {
-            file && <div ><img src={getIconFormat()}/>{file.name}</div>
+            file && 
+            <div >
+                <img className="file_iconImg" src={getIconFormat()}/>{file.name}
+                <p className="file_size">size: {file.size}</p> 
+                <p className="file_created">created_at: {file.atime}</p>
+            </div>
         }
             
     </div>

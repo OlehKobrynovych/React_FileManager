@@ -1,0 +1,6 @@
+.filter__arrow {
+    width: 15px;
+}
+.filter__arrow--rotate {
+    transform: rotate(180deg);
+}

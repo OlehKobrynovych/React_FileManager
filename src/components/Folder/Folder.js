@@ -4,7 +4,7 @@ import File from "../File/File";
 
 const Folder = ({files}) => {
     // const [files, setFiles] = useState({})
-
+// debugger
     // useEffect (() => {
         
     //         const iconNames = ['bmp', 'doc', 'jpg', 'jpeg', 'mp4', 'pdf', 'png', 'ppt', 'txt', 'xls', 'xlsx']; 
