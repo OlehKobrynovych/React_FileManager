@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/React_FileManager/static/css/main.93a0497a.css",
+    "main.js": "/React_FileManager/static/js/main.84f9c7b1.js",
+    "static/js/787.db0b8be5.chunk.js": "/React_FileManager/static/js/787.db0b8be5.chunk.js",
+    "static/media/doc.svg": "/React_FileManager/static/media/doc.cf96830950a40142223a101fdbb38ab8.svg",
+    "static/media/pdf.svg": "/React_FileManager/static/media/pdf.eda31582ae168098cf3f9304a78e7c19.svg",
+    "static/media/png.svg": "/React_FileManager/static/media/png.62fd2f9689cf774667e9336ddfbe0d6d.svg",
+    "static/media/jpeg.svg": "/React_FileManager/static/media/jpeg.9263932247cc6afa69bee6cd077d14ce.svg",
+    "static/media/xlsx.svg": "/React_FileManager/static/media/xlsx.5c77c2b7a5ab66b5efe4b79167824dd7.svg",
+    "static/media/docx.svg": "/React_FileManager/static/media/docx.0c69fd44f1055139a9ab185e9c850cb4.svg",
+    "static/media/folder.svg": "/React_FileManager/static/media/folder.c96720be1d4c33839ec1fb9260b8bae4.svg",
+    "static/media/file.svg": "/React_FileManager/static/media/file.e59a5217e3b641bc3083fb7abb1fedd7.svg",
+    "index.html": "/React_FileManager/index.html",
+    "main.93a0497a.css.map": "/React_FileManager/static/css/main.93a0497a.css.map",
+    "main.84f9c7b1.js.map": "/React_FileManager/static/js/main.84f9c7b1.js.map",
+    "787.db0b8be5.chunk.js.map": "/React_FileManager/static/js/787.db0b8be5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.93a0497a.css",
+    "static/js/main.84f9c7b1.js"
+  ]
+}
