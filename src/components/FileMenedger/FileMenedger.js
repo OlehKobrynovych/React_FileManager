@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import FolderIcon from "../../assets/img/folder.svg";
-import Filter from "../Filter/Filter";
+// import Filter from "../Filter/Filter";
 import Folder from "../Folder/Folder";
+import Button from '@mui/material/Button';
+
+import "./FileMenedger.css"
 
 
 const FileMenedger = () => {
-    const [folders, setFolders] = useState({})
-    const [filterFolders, setFilterFolders] = useState([])
-    const [currentFolderName, setCurrentFolderName] = useState(null)
+    const [folders, setFolders] = useState(null)
+    // const [filterFolders, setFilterFolders] = useState([])
+    const [currentFolder, setCurrentFolder] = useState(null)
 
     // debugger
     useEffect (() => {
@@ -24,25 +27,28 @@ const FileMenedger = () => {
       }, [])
 
     const handleClick = (folderName) => {
-        setCurrentFolderName(folderName)
-        setFilterFolders(folders[folderName])
+        setCurrentFolder(folders[folderName])
+        // setFilterFolders(folders[folderName])
 }
 
 
   return ( 
    <div>
-       <Filter setFilterFolders={setFilterFolders} files={filterFolders}/>
+       {/* <Filter setFilterFolders={setFilterFolders} files={filterFolders}/> */}
        {
-           !currentFolderName && folders.Folder1 && Object.keys(folders).map(el => (
-               <button 
+           !currentFolder && folders && Object.keys(folders).map(el => (
+               <Button 
+                    className="fileMenedger__folder"
+                    variant="text"
                     key={el}><img src={FolderIcon}
                     onClick={() => handleClick(el)} />
                         {el}
-                </button>
+                </Button>
            ))
        }
        {
-           currentFolderName && <Folder files={filterFolders} />
+        //    currentFolderName && <Folder files={filterFolders} />
+           currentFolder && <Folder files={currentFolder} />
        }
    
    </div>

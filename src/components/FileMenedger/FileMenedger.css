@@ -1,0 +1,4 @@
+.fileMenedger__folder {
+  display: flex;
+  flex-direction: column;
+}
