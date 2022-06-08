@@ -1,0 +1,9 @@
+@media (max-width: 576px) {
+    th.tableHeader__th {
+        padding: 0px;
+        font-size: 14px;
+    }
+    th.tableHeader__th svg {
+        margin: 0px;
+    }
+}
