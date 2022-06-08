@@ -100,7 +100,7 @@ export default function Folder({files, setCurrentFolder}) {
  
     return (
          <>
-            <Button variant="contained" onClick={() => setCurrentFolder(null)} >Return</Button>
+            <Button className='folder__returnBtn' variant="contained" onClick={() => setCurrentFolder(null)} >Return</Button>
 
             <Box sx={{ width: '100%' }}> 
                 <Paper sx={{ width: '100%', mb: 2 }}> 

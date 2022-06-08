@@ -6,6 +6,9 @@
 .folder__items {
     display: none;
 }
+.folder__returnBtn {
+    margin: 17px !important;
+}
 
 @media (max-width: 576px) {
     tr.folder__row {
