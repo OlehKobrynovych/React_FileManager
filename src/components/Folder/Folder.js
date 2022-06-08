@@ -1,46 +1,12 @@
-
-// import File from "../File/File";
-
-
-// const Folder = ({files}) => {
-//     // const [files, setFiles] = useState({})
-// // debugger
-//     // useEffect (() => {
-        
-//     //         const iconNames = ['bmp', 'doc', 'jpg', 'jpeg', 'mp4', 'pdf', 'png', 'ppt', 'txt', 'xls', 'xlsx']; 
-//     //         const arr = files.split('.'); 
-//     //         const name = arr[arr.length - 1]; 
-//     //         return iconNames.includes(name) ? name : 'doc'; 
-        
-        
-//     //   }, [files])
-
-
-//   return ( 
-//     <div>
-//         {files.map(el =>
-//             (
-//                 <File file={el} key={el.name}/>
-//         ))}
-//     </div>
-//   )
-// }
-
-// export default Folder
-
-
-import * as React from 'react'; 
-import PropTypes from 'prop-types'; 
+import React from 'react'; 
+import { useEffect} from "react";
 import Box from '@mui/material/Box'; 
 import Table from '@mui/material/Table'; 
 import TableBody from '@mui/material/TableBody'; 
 import TableCell from '@mui/material/TableCell'; 
 import TableContainer from '@mui/material/TableContainer'; 
-import TableHead from '@mui/material/TableHead'; 
 import TableRow from '@mui/material/TableRow'; 
-import TableSortLabel from '@mui/material/TableSortLabel'; 
 import Paper from '@mui/material/Paper'; 
-import { visuallyHidden } from '@mui/utils'; 
 
 import docIcon from "../../assets/img/doc.svg";
 import docxIcon from "../../assets/img/docx.svg";
@@ -50,86 +16,29 @@ import pdfIcon  from "../../assets/img/pdf.svg";
 import pngIcon from "../../assets/img/png.svg";
 import xlsxIcon from "../../assets/img/xlsx.svg";
  
+import TableHeader from '../TableHeader/TableHeader';
 import "./Folder.css"
+import { Button } from '@mui/material';
+import moment from 'moment';
 
-const EnhancedTableHead = (props) => { 
-    const { order, orderBy, onRequestSort } = props; 
  
-    const headCells = [ 
-        { 
-            id: 'name', 
-            numeric: false, 
-            label: 'Name', 
-        }, 
-        { 
-            id: 'size', 
-            numeric: true, 
-            label: 'Size', 
-        }, 
-        { 
-            id: 'mtime', 
-            numeric: true, 
-            label: 'Updated_at', 
-        }, 
-        { 
-            id: 'atime', 
-            numeric: true, 
-            label: 'Created_at', 
-        }, 
-    ]; 
- 
-    const createSortHandler = (property) => (event) => { 
-        onRequestSort(event, property); 
-    }; 
- 
-    return ( 
-        <TableHead> 
-            <TableRow> 
-                {headCells.map((headCell) => ( 
-                    <TableCell 
-                        key={headCell.id} 
-                        align={headCell.numeric ? 'right' : 'left'} 
-                        sortDirection={orderBy === headCell.id ? order : false} 
-                    > 
-                        <TableSortLabel 
-                            active={orderBy === headCell.id} 
-                            direction={orderBy === headCell.id ? order : 'asc'} 
-                            onClick={createSortHandler(headCell.id)} 
-                        > 
-                        {headCell.label} 
-                        {orderBy === headCell.id ? ( 
-                            <Box component="span" sx={visuallyHidden}> 
-                                {order === 'desc' ? 'sorted descending' : 'sorted ascending'} 
-                            </Box> 
-                        ) : null} 
-                        </TableSortLabel> 
-                    </TableCell> 
-                ))} 
-            </TableRow> 
-        </TableHead> 
-    ); 
-} 
- 
-EnhancedTableHead.propTypes = { 
-    onRequestSort: PropTypes.func.isRequired, 
-    order: PropTypes.oneOf(['asc', 'desc']).isRequired, 
-    orderBy: PropTypes.string.isRequired, 
-}; 
- 
-export default function Folder({files}) { 
-    // files 
-    // debugger 
- 
-    // atime: 1654567840 
-    // dev: 2049 
-    // mtime: 1641977227 
-    // name: "regions.xlsx" 
-    // size: 10234 
-    // type: " 
+export default function Folder({files, setCurrentFolder}) { 
  
     const [order, setOrder] = React.useState('asc'); 
     const [orderBy, setOrderBy] = React.useState('size'); 
- 
+
+    useEffect (() => {
+        let asd = (localStorage.getItem('order'))
+        if (asd) {
+            setOrder(asd)
+        }
+
+        let asdasd = (localStorage.getItem('orderBy'))
+        if (asdasd) {
+            setOrderBy(asdasd)
+        }
+    }, [])
+
     const stableSort = (array, comparator) => { 
         const stabilizedThis = array.map((el, index) => [el, index]); 
         stabilizedThis.sort((a, b) => { 
@@ -162,6 +71,8 @@ export default function Folder({files}) {
         const isAsc = orderBy === property && order === 'asc'; 
         setOrder(isAsc ? 'desc' : 'asc'); 
         setOrderBy(property); 
+        localStorage.setItem('order', `${isAsc ? 'desc' : 'asc'}`);
+        localStorage.setItem('orderBy', `${property}`);
     }; 
 
     const getIconFormat = React.useCallback((file) =>{
@@ -178,60 +89,87 @@ export default function Folder({files}) {
             const fileName = arr[arr.length - 1]; 
             return iconNames.hasOwnProperty(fileName) ? iconNames[fileName] : fileIcon;
         }
-
         return;
     }, [files]);
+
+    const getHumanDate = (date) => { 
+        let dateUtc = moment.utc(date); 
+        let localDate = moment(dateUtc).local().calendar({ sameElse: 'MM/DD/YYYY [at] h:mm a' }); 
+        return localDate; 
+    };
  
-    return ( <>
+    return (
+         <>
+            <Button variant="contained" onClick={() => setCurrentFolder(null)} >Return</Button>
+
+            <Box sx={{ width: '100%' }}> 
+                <Paper sx={{ width: '100%', mb: 2 }}> 
+                    <TableContainer> 
+                        <Table
+                            className='folder__table'
+                            sx={{ minWidth: 320 }} 
+                            aria-labelledby="tableTitle" 
+                            size={'small'} 
+                        > 
+
+                            <TableHeader 
+                                order={order} 
+                                orderBy={orderBy} 
+                                onRequestSort={handleRequestSort} 
+                            /> 
+
+                            <TableBody className='folder__tableBody' > 
+                                {stableSort(files, getComparator(order, orderBy)) 
+                                    .map((row, index) => { 
+                                        const labelId = `enhanced-table-checkbox-${index}`; 
     
-        <Box sx={{ width: '100%' }}> 
-            <Paper sx={{ width: '100%', mb: 2 }}> 
-                <TableContainer> 
-                    <Table
-// sx={{ minWidth: 750 }} 
-                        sx={{ minWidth: 320 }} 
-                        aria-labelledby="tableTitle" 
-                        size={'small'} 
-                    > 
-                        <EnhancedTableHead 
-                            order={order} 
-                            orderBy={orderBy} 
-                            onRequestSort={handleRequestSort} 
-                        /> 
- 
-                        <TableBody> 
-                            {stableSort(files, getComparator(order, orderBy)) 
-                            .map((row, index) => { 
-                                const labelId = `enhanced-table-checkbox-${index}`; 
- 
-                                return ( 
-                                <TableRow 
-                                    hover 
-                                    tabIndex={-1} 
-                                    key={row.name} 
+                                            return ( 
+                                                <TableRow 
+                                                    className='folder__row'
+                                                    hover 
+                                                    tabIndex={-1} 
+                                                    key={row.name} 
+                                                > 
+                                                    <TableCell 
+                                                        component="th" 
+                                                        id={labelId} 
+                                                        scope="row" 
+                                                        padding="none" 
+                                                    > 
+                                                        <img className='folder__file-icon' src={getIconFormat(row.name)} alt='img'/>
+                                                        <span>{row.name}</span>
+                                                    </TableCell> 
+                                                    <TableCell align="right">{row.size}</TableCell> 
+                                                    <TableCell align="right">{getHumanDate(row.mtime)}</TableCell> 
+                                                    <TableCell align="right">{getHumanDate(row.atime)}</TableCell> 
+                                                </TableRow> 
+                                            ); 
+                                    })
+                                } 
+    
+                            </TableBody> 
+                        </Table> 
+                    </TableContainer>
+
+                    <div className='folder__items'>
+                        {stableSort(files, getComparator(order, orderBy)) 
+                            .map((row, index) => ( 
+                                <div 
+                                    className='folder__item'
+                                    key={row.name}
                                 > 
-                                    <TableCell 
-                                        component="th" 
-                                        id={labelId} 
-                                        scope="row" 
-                                        padding="none" 
-                                    > 
-                                        <img className='folder__file-icon' src={getIconFormat(row.name)} alt='img' width={'33'}/>
-                                        <span>{row.name}</span>
-                                    </TableCell> 
-                                    <TableCell align="right">{row.size}</TableCell> 
-                                    <TableCell align="right">{row.mtime}</TableCell> 
-                                    <TableCell align="right">{row.atime}</TableCell> 
-                                </TableRow> 
-                                ); 
-                            })} 
- 
-                        </TableBody> 
-                    </Table> 
-                </TableContainer> 
-            </Paper> 
-        </Box> 
-    </>    
+                                        <img className='folder__file-icon' src={getIconFormat(row.name)} alt='img'/>
+                                        <b>{row.name}</b>
+                                        <p><b>Size:</b> {row.size}</p> 
+                                        <p><b>Updated:</b> {getHumanDate(row.mtime)}</p> 
+                                        <p><b>Created:</b> {getHumanDate(row.atime)}</p> 
+                                </div>
+                                ))
+                        }
+                    </div>
+                </Paper> 
+            </Box> 
+        </>    
     ); 
 }
 
