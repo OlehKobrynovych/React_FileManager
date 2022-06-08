@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/React_FileManager/static/css/main.a560f4fe.css",
-    "main.js": "/React_FileManager/static/js/main.f681e414.js",
+    "main.css": "/React_FileManager/static/css/main.2ad75a78.css",
+    "main.js": "/React_FileManager/static/js/main.cd99d221.js",
     "static/js/787.db0b8be5.chunk.js": "/React_FileManager/static/js/787.db0b8be5.chunk.js",
     "static/media/doc.svg": "/React_FileManager/static/media/doc.cf96830950a40142223a101fdbb38ab8.svg",
     "static/media/pdf.svg": "/React_FileManager/static/media/pdf.eda31582ae168098cf3f9304a78e7c19.svg",
@@ -12,12 +12,12 @@
     "static/media/folder.svg": "/React_FileManager/static/media/folder.c96720be1d4c33839ec1fb9260b8bae4.svg",
     "static/media/file.svg": "/React_FileManager/static/media/file.e59a5217e3b641bc3083fb7abb1fedd7.svg",
     "index.html": "/React_FileManager/index.html",
-    "main.a560f4fe.css.map": "/React_FileManager/static/css/main.a560f4fe.css.map",
-    "main.f681e414.js.map": "/React_FileManager/static/js/main.f681e414.js.map",
+    "main.2ad75a78.css.map": "/React_FileManager/static/css/main.2ad75a78.css.map",
+    "main.cd99d221.js.map": "/React_FileManager/static/js/main.cd99d221.js.map",
     "787.db0b8be5.chunk.js.map": "/React_FileManager/static/js/787.db0b8be5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a560f4fe.css",
-    "static/js/main.f681e414.js"
+    "static/css/main.2ad75a78.css",
+    "static/js/main.cd99d221.js"
   ]
 }
