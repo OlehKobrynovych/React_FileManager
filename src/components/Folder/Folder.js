@@ -1,5 +1,6 @@
-import React from 'react'; 
-import { useEffect} from "react";
+import React, { useEffect} from 'react'; 
+import PropTypes from 'prop-types'; 
+
 import Box from '@mui/material/Box'; 
 import Table from '@mui/material/Table'; 
 import TableBody from '@mui/material/TableBody'; 
@@ -7,6 +8,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer'; 
 import TableRow from '@mui/material/TableRow'; 
 import Paper from '@mui/material/Paper'; 
+import { Button } from '@mui/material';
 
 import docIcon from "../../assets/img/doc.svg";
 import docxIcon from "../../assets/img/docx.svg";
@@ -17,25 +19,22 @@ import pngIcon from "../../assets/img/png.svg";
 import xlsxIcon from "../../assets/img/xlsx.svg";
  
 import TableHeader from '../TableHeader/TableHeader';
-import "./Folder.css"
-import { Button } from '@mui/material';
 import moment from 'moment';
+import "./Folder.css"
 
- 
-export default function Folder({files, setCurrentFolder}) { 
- 
+const Folder = ({files, setCurrentFolder}) => { 
     const [order, setOrder] = React.useState('asc'); 
     const [orderBy, setOrderBy] = React.useState('size'); 
 
-    useEffect (() => {
-        let asd = (localStorage.getItem('order'))
-        if (asd) {
-            setOrder(asd)
+    useEffect(() => {
+        let localStorageOrder = (localStorage.getItem('order'))
+        if (localStorageOrder) {
+            setOrder(localStorageOrder)
         }
 
-        let asdasd = (localStorage.getItem('orderBy'))
-        if (asdasd) {
-            setOrderBy(asdasd)
+        let localStorageOrderBy = (localStorage.getItem('orderBy'))
+        if (localStorageOrderBy) {
+            setOrderBy(localStorageOrderBy)
         }
     }, [])
 
@@ -44,7 +43,7 @@ export default function Folder({files, setCurrentFolder}) {
         stabilizedThis.sort((a, b) => { 
             const order = comparator(a[0], b[0]); 
             if (order !== 0) { 
-            return order; 
+                return order; 
             } 
             return a[1] - b[1]; 
         }); 
@@ -100,7 +99,7 @@ export default function Folder({files, setCurrentFolder}) {
  
     return (
          <>
-            <Button className='folder__returnBtn' variant="contained" onClick={() => setCurrentFolder(null)} >Return</Button>
+            <Button className='folder__returnBtn' variant="contained" onClick={() => setCurrentFolder(null)} >Go back</Button>
 
             <Box sx={{ width: '100%' }}> 
                 <Paper sx={{ width: '100%', mb: 2 }}> 
@@ -122,7 +121,6 @@ export default function Folder({files, setCurrentFolder}) {
                                 {stableSort(files, getComparator(order, orderBy)) 
                                     .map((row, index) => { 
                                         const labelId = `enhanced-table-checkbox-${index}`; 
-    
                                             return ( 
                                                 <TableRow 
                                                     className='folder__row'
@@ -146,7 +144,6 @@ export default function Folder({files, setCurrentFolder}) {
                                             ); 
                                     })
                                 } 
-    
                             </TableBody> 
                         </Table> 
                     </TableContainer>
@@ -158,13 +155,13 @@ export default function Folder({files, setCurrentFolder}) {
                                     className='folder__item'
                                     key={row.name}
                                 > 
-                                        <img className='folder__file-icon' src={getIconFormat(row.name)} alt='img'/>
-                                        <b>{row.name}</b>
-                                        <p><b>Size:</b> {row.size}</p> 
-                                        <p><b>Updated:</b> {getHumanDate(row.mtime)}</p> 
-                                        <p><b>Created:</b> {getHumanDate(row.atime)}</p> 
+                                    <img className='folder__file-icon' src={getIconFormat(row.name)} alt='img'/>
+                                    <b>{row.name}</b>
+                                    <p><b>Size:</b> {row.size}</p> 
+                                    <p><b>Updated:</b> {getHumanDate(row.mtime)}</p> 
+                                    <p><b>Created:</b> {getHumanDate(row.atime)}</p> 
                                 </div>
-                                ))
+                            ))
                         }
                     </div>
                 </Paper> 
@@ -173,3 +170,9 @@ export default function Folder({files, setCurrentFolder}) {
     ); 
 }
 
+Folder.propTypes = { 
+    setCurrentFolder: PropTypes.func,
+    files: PropTypes.arrayOf(PropTypes.object),
+}; 
+
+export default Folder;

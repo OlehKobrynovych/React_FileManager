@@ -6,10 +6,7 @@ import { Box, TableCell, TableRow } from '@mui/material';
 
 import "./TableHeader.css"
 
-const TableHeader = (props) => {
-  
-    const { order, orderBy, onRequestSort } = props; 
- 
+const TableHeader = ({order, orderBy, onRequestSort}) => {
     const headCells = [ 
         { 
             id: 'name', 
@@ -37,43 +34,39 @@ const TableHeader = (props) => {
         onRequestSort(event, property); 
     }; 
 
-
-  return ( 
-    <TableHead> 
-        <TableRow> 
-            {headCells.map((headCell) => ( 
-                <TableCell 
-                    className='tableHeader__th'
-                    key={headCell.id} 
-                    align={headCell.numeric ? 'right' : 'left'} 
-                    sortDirection={orderBy === headCell.id ? order : false} 
-                > 
-                    <TableSortLabel 
-                        active={orderBy === headCell.id} 
-                        direction={orderBy === headCell.id ? order : 'asc'} 
-                        onClick={createSortHandler(headCell.id)} 
+    return ( 
+        <TableHead> 
+            <TableRow> 
+                {headCells.map((headCell) => ( 
+                    <TableCell 
+                        className='tableHeader__th'
+                        key={headCell.id} 
+                        align={headCell.numeric ? 'right' : 'left'} 
+                        sortDirection={orderBy === headCell.id ? order : false} 
                     > 
-                    {headCell.label} 
-                    {orderBy === headCell.id ? ( 
-                        <Box component="span" sx={visuallyHidden}> 
-                            {order === 'desc' ? 'sorted descending' : 'sorted ascending'} 
-                        </Box> 
-                    ) : null} 
-                    </TableSortLabel> 
-                </TableCell> 
-            ))} 
-        </TableRow> 
-    </TableHead> 
-  )
+                        <TableSortLabel 
+                            active={orderBy === headCell.id} 
+                            direction={orderBy === headCell.id ? order : 'asc'} 
+                            onClick={createSortHandler(headCell.id)} 
+                        > 
+                        {headCell.label} 
+                        {orderBy === headCell.id ? ( 
+                            <Box component="span" sx={visuallyHidden}> 
+                                {order === 'desc' ? 'sorted descending' : 'sorted ascending'} 
+                            </Box> 
+                        ) : null} 
+                        </TableSortLabel> 
+                    </TableCell> 
+                ))} 
+            </TableRow> 
+        </TableHead> 
+    )
 }
 
 TableHeader.propTypes = { 
-        onRequestSort: PropTypes.func.isRequired, 
-        order: PropTypes.oneOf(['asc', 'desc']).isRequired, 
-        orderBy: PropTypes.string.isRequired, 
-    }; 
+    onRequestSort: PropTypes.func.isRequired, 
+    order: PropTypes.oneOf(['asc', 'desc']).isRequired, 
+    orderBy: PropTypes.string.isRequired, 
+}; 
      
-
 export default TableHeader
-
-

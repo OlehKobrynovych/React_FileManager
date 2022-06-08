@@ -9,6 +9,10 @@
 .folder__returnBtn {
     margin: 17px !important;
 }
+tr.folder__row th {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
 
 @media (max-width: 576px) {
     tr.folder__row {

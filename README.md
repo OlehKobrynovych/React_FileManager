@@ -31,16 +31,20 @@ $ npm start # or yarn start
 
 Run deploy
 ```bash
-$ bash deploy.sh
+$ npm run deploy
 ```
 
 
 ## Description
 
+Unfinished demonstration project to improve skills.
+
+
 
 ## Technologies
 Project uses:
-* React 
+* React (useState, useEffect, useCallback)
 * Material UI
 * Moment
 * LocalStorage
+* Prop-types
